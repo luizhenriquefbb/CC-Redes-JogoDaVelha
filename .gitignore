@@ -25,3 +25,8 @@ hs_err_pid*
 # IDE's
 /.idea/*
 /CC-Redes-JogoDaVelha.iml
+/nbproject/*
+/build/
+/.vscode/launch.test.json
+/build.xml
+/manifest.mf
