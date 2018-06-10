@@ -1,0 +1,60 @@
+servidor
+    lista<jogador> jogadores
+    lista<sala> salas
+    ---------------------
+    void broadcastRequestStatus
+    void escutaJogadores
+
+sala
+    int idSala
+    tabuleiro tabuleiro
+    jogador jogador1
+    jogador jogador2
+    jogador jogadorVez
+    timer timer
+    ---------------------
+    void resetTimer{
+        timer.reset = true
+        timer.tempoRestante = duracaoTurno // decrescente
+    }
+    void checaTimer
+    void broadcastTabuleiro
+    void encerraPartida
+    void broadcastResultado
+    void validaJogada
+    
+jogador
+    str ipServidor
+    int idSala
+    tabuleiro? tabuleiro
+    bool emJogo
+    ---------------------
+    void convidar
+    void aceitar
+    void mandaStatus // 'estou online'
+    void mandaJogada
+    void desistirPartida
+
+tabuleiro
+    posicao[9] posicoes
+    Jogador[2] jogadores
+    ---------------------
+    bool temGanhador
+    jogador getGanhador
+    bool ehPosicaoValida
+
+timer
+    int tempoRestante
+    bool reset
+    ---------------------    
+    void iniciaTimer
+        reset = false
+        while (tempoRestante > 0 && !reset)
+        {
+            sleep(1000) //ms
+            tempoRestante -= 1
+        }
+
+posicao
+    str x, o, '_'
+    ---------------------

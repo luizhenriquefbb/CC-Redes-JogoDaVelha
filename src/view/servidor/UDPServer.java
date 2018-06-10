@@ -5,11 +5,13 @@
  */
 package view.servidor;
 
+import infra.Jogador;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,10 +21,11 @@ import java.util.logging.Logger;
  * ref:http://www.baeldung.com/udp-in-java
  * This Server simply listens to connections and reply with an eccho via UDP the Clients that try to connect. It also prints 
  */
-public class UDPServer extends Thread{
+public class UDPServer {
     private DatagramSocket socket;
     private boolean running;
-    private byte[] buffer = new byte[256];
+    private byte[] buffer = new byte[500];
+    private ArrayList<Jogador> jogadores;
  
     public UDPServer() {
         try {
@@ -36,35 +39,19 @@ public class UDPServer extends Thread{
     public void run() {
         running = true;
         System.out.println("Running");
- 
+
         while (running) {
             //pacote para troca de mensagens
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-            
+
             try {
+                //bloqueia a thread até receber uma nova conexão
                 socket.receive(packet);
             } catch (IOException ex) {
                 Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            //configurando o IP para responder ao cliente
-            InetAddress address = packet.getAddress();
-            int port = packet.getPort();
-            
-            packet = new DatagramPacket(buffer, buffer.length, address, port);
-            String received = new String(packet.getData(), 0, packet.getLength());
-             
-            //closes the server
-            if(received.equalsIgnoreCase("bye")) {      //PQ ISSO NÃO FUNCIONA
-                running = false;
-                continue;
-            }
-            try {
-                socket.send(packet);
-                System.out.println("Server replied - " + received);
-            } catch (IOException ex) {
-                Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            //cria uma thread para responder ao cliente
+            new Thread( new RunnableClient(socket, packet, jogadores)).start();
         }
         
         socket.close();
@@ -72,6 +59,6 @@ public class UDPServer extends Thread{
     
     public static void main(String[] args){
         UDPServer s = new UDPServer();
-        s.start();
+        s.run();
     }
 }

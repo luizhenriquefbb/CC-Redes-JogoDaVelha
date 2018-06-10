@@ -11,21 +11,17 @@ package infra;
  */
 public class Tabuleiro {
     Integer[] posicoes;
+    //0 == circulo
+    //1 == xis
+    //-1 == vazio
 
     public Tabuleiro() {
         this.posicoes = new Integer[9];
     }
     
-    boolean temGanhador(){
-        return true;
-    }
-    
-    Jogador getGanhador(){
-        return new Jogador(); 
-    }
-    
     boolean ehPosicaoValida(int posicao){
-        return true;
+        return ((posicao < 9) && (posicao >= 0) && (posicoes[posicao] == -1));
+            
     }
     
 }

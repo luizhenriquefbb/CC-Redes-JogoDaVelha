@@ -3,12 +3,14 @@ package infra;
 public class Jogador {
 
     String nome;
-    String ipServidor;
+    String ipJogador;
     int idSala;
     Tabuleiro tabuleiro;
     boolean emJogo;
 
-    public Jogador() {
+    public Jogador(String nome, String ipJogador) {
+        this.nome = nome;
+        this.ipJogador = ipJogador;
     }
 
     void convidar(){
@@ -40,11 +42,11 @@ public class Jogador {
     }
 
     public String getIpServidor() {
-        return ipServidor;
+        return ipJogador;
     }
 
     public void setIpServidor(String ipServidor) {
-        this.ipServidor = ipServidor;
+        this.ipJogador = ipServidor;
     }
 
     public int getIdSala() {
@@ -70,6 +72,12 @@ public class Jogador {
     public void setEmJogo(boolean emJogo) {
         this.emJogo = emJogo;
     }
-        
-        
+
+    @Override
+    public String toString() {
+        return "Jogador{" +
+                "nome='" + nome + '\'' +
+                ", ipJogador='" + ipJogador + '\'' +
+                "}\n";
+    }
 }
