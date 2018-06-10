@@ -30,3 +30,5 @@ hs_err_pid*
 /.vscode/launch.test.json
 /build.xml
 /manifest.mf
+/JogoDaVelha/nbproject/private/
+/dist/
