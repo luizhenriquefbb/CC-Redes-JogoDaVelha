@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -91,7 +92,8 @@ public class UDPClient {
         } catch (IOException ex) {
             Logger.getLogger(UDPClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        packet = new DatagramPacket(buffer, buffer.length);
+        byte[] b = new byte[1400];
+        packet = new DatagramPacket(b, b.length);
         try {
             socket.receive(packet);
         } catch (IOException ex) {
@@ -108,8 +110,40 @@ public class UDPClient {
     
     public static void main(String[] args){
         UDPClient c = new UDPClient();
-        c.solicitarJogadores();
+
+
+        System.out.println(getMenu());
+        Scanner s = new Scanner(System.in);
+        int op = s.nextInt();
+
+        switch (op) {
+            case 0:
+                c.close();
+                break;
+
+            case 1:
+                c.entrarJogo("Alisson");
+                break;
+
+            case 2:
+                c.solicitarJogadores();
+                break;
+
+
+        }
+
     }
-    
+
+    public static String getMenu(){
+        return "0 - sair\n" +
+                "1 - entrar jogo\n" +
+                "2 - solicitar Jogadores\n"
+        ;
+
+    }
+
+
+
+
     
 }

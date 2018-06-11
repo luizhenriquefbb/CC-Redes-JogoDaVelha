@@ -51,12 +51,14 @@ public class RunnableClient implements Runnable{
         System.out.println(buffer.length);
         System.out.println(msg.toString().getBytes().length);
         packet.setData(buffer);
-        DatagramPacket packetToReply = new DatagramPacket(buffer, buffer.length, packet.getAddress(), 4445);
+//        DatagramPacket packetToReply = new DatagramPacket(buffer, buffer.length, packet.getAddress(), 4445);
         try {
-//            packet.setLength(buffer.length);
             socket.send(packet);
+            String response =  new String(packet.getData(), 0, packet.getLength());
             System.out.println("Server replied - " + new String(packet.getData(), 0, packet.getLength()));
-            System.out.println(packet.getData());
+            System.out.println("response = " + response);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,11 +71,19 @@ public class RunnableClient implements Runnable{
             resposta.put(Strings.LISTA_JOGADORES, jogadores.toString());
             reply(resposta);
         }
-        
+
         else if(json.get(Strings.ENTRADA_ACAO).equals(Strings.INFORMAR_NOME)){
+//            Informa nome
+//            adiciona jogador na lista de jogadores. recebe o nome do dito cujo e o o ip
             if(jogadores.addJogador((String) json.get(Strings.NOME_JOGADOR)
                                     , packet.getAddress().toString())){
-                
+
+//                Devolve a lista de jogadores
+                HashMap<String,Object> resposta = new HashMap<>();
+                resposta.put(Strings.LISTA_JOGADORES, jogadores.toString());
+
+
+                reply(resposta);
             }
         }
         

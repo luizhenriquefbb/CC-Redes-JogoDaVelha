@@ -29,6 +29,7 @@ public class UDPServer {
  
     public UDPServer() {
         try {
+            // TODO: colocar em arquivo de configuração
             //socket que utiliza a porta 4445
             socket = new DatagramSocket(4445);
         } catch (SocketException ex) {
