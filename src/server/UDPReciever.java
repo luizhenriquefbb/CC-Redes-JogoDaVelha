@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.net.UnknownHostException;
 import java.util.Calendar;
 
-import common.Payload;
+import util.Payload;
 
 /**
  * server UDP reciever that receives packets from the client and notifies server so it can respond
@@ -41,7 +41,8 @@ public class UDPReciever implements Runnable {
                     socket.receive(packet);
                     String ip = packet.getAddress().getHostAddress();
                     int port = packet.getPort();
-                    Payload payload = new Payload(new String(buffer, 0, packet.getLength()));
+//                    Payload payload = new Payload(new String(buffer, 0, packet.getLength()));
+                    String payload = new String(buffer, 0, packet.getLength());
                     System.out.println("[" + Calendar.getInstance().getTimeInMillis() + "] Receive from sender (IP: "
                             + ip + ", Port: " + String.valueOf(port) + "): " + payload);
                     handler.respond(packet);

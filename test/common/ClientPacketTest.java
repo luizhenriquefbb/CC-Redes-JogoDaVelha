@@ -1,5 +1,7 @@
 package common;
 
+import util.Packet;
+import util.Payload;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;

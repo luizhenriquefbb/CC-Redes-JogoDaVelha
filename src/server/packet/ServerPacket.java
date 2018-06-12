@@ -2,8 +2,8 @@ package server.packet;
 
 import java.lang.reflect.InvocationTargetException;
 
-import common.Packet;
-import common.Payload;
+import util.Packet;
+import util.Payload;
 
 import exception.BadPacketException;
 

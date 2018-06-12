@@ -1,5 +1,8 @@
 package common;
 
+import util.UserList;
+import util.User;
+import util.UserState;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;

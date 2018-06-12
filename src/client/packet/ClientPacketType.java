@@ -13,7 +13,7 @@ import client.packet.impl.LogoutPacket;
 import client.packet.impl.PlayGamePacket;
 import client.packet.impl.QueryListPacket;
 
-import common.Payload;
+import util.Payload;
 
 import exception.BadPacketException;
 import exception.InvalidClientCommandException;

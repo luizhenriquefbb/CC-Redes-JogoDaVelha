@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import server.packet.ServerPacket;
 
-import common.Payload;
+import util.Payload;
 
 /**
  * Packet indicating result of game

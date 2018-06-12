@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import server.packet.LoginAcknowledgementType;
 import server.packet.ServerPacket;
 
-import common.Payload;
+import util.Payload;
 
 import exception.BadPacketException;
 

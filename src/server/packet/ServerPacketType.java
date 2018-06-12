@@ -14,7 +14,7 @@ import server.packet.impl.LoginAcknowledgementPacket;
 import server.packet.impl.PlayRequestAcknowledgementPacket;
 import server.packet.impl.PlayRequestPacket;
 
-import common.Payload;
+import util.Payload;
 
 import exception.BadPacketException;
 

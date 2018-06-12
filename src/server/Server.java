@@ -36,10 +36,10 @@ import client.packet.impl.LoginPacket;
 import client.packet.impl.LogoutPacket;
 import client.packet.impl.PlayGamePacket;
 
-import common.Payload;
-import common.User;
-import common.UserList;
-import common.UserState;
+import util.Payload;
+import util.User;
+import util.UserList;
+import util.UserState;
 
 /**
  * Tic tac toe server
@@ -57,12 +57,12 @@ public class Server {
      */
     public static void main(String[] args) {
         //check arguments
-        if (args.length != 1) {
-            System.out.println("usage: server <server-port>");
-            return;
-        }
+//        if (args.length != 1) {
+//            System.out.println("usage: server <server-port>");
+//            return;
+//        }
         try {
-            (new Server(Integer.valueOf(args[0]))).recieve();
+            (new Server(8000)).receive();
         } catch (SocketException e) {
             System.out.println("couldn't connect to socket! exiting....");
         } catch (IOException e) {
@@ -362,7 +362,7 @@ public class Server {
      * Starts up the server
      * @throws SocketException
      */
-    public void recieve() throws SocketException {
+    public void receive() throws SocketException {
         pool.execute(new UDPReciever(socket, this));
     }
 
@@ -372,7 +372,7 @@ public class Server {
      * @throws UnknownHostException
      */
     public void respond(DatagramPacket p) throws UnknownHostException {
-        Payload payload = new Payload(new String(p.getData(), 0, p.getLength()).trim());
+        String payload = new String(p.getData(), 0, p.getLength()).trim();
         ClientPacket cp = ClientPacket.fromPayload(payload);
 
         ack(cp, p);

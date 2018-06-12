@@ -1,8 +1,8 @@
 package game;
 
-import common.Pair;
-import common.User;
-import common.UserState;
+import util.Pair;
+import util.User;
+import util.UserState;
 
 /**
  * Representation of a tic tac toe game between two users

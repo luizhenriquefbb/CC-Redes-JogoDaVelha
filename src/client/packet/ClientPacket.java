@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 import client.Client;
 import client.Command;
 
-import common.Packet;
-import common.Payload;
+import util.Packet;
+import util.Payload;
 
 import exception.BadPacketException;
 
@@ -66,7 +66,7 @@ public abstract class ClientPacket extends Packet {
      * @param payload
      * @return
      */
-    public static ClientPacket fromPayload(Payload payload) {
+    public static ClientPacket fromPayload(String payload) {
         for (ClientPacketType t : ClientPacketType.values()) {
             try {
                 return fromPayload(payload, t);
@@ -84,7 +84,7 @@ public abstract class ClientPacket extends Packet {
      * @param type
      * @return
      */
-    public static ClientPacket fromPayload(Payload payload, ClientPacketType type) {
+    public static ClientPacket fromPayload(String payload, ClientPacketType type) {
         try {
             return (ClientPacket) type.getPacketClass().getDeclaredMethod("fromPayload", Payload.class)
                     .invoke(null, payload);

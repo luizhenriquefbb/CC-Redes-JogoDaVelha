@@ -1,5 +1,6 @@
 package client;
 
+import View.UI;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
@@ -17,8 +18,8 @@ import server.packet.impl.LoginAcknowledgementPacket;
 import server.packet.impl.PlayRequestAcknowledgementPacket;
 import server.packet.impl.PlayRequestPacket;
 
-import common.Payload;
-import common.User;
+import util.Payload;
+import util.User;
 
 import exception.BadPacketException;
 
@@ -35,19 +36,20 @@ public class Client {
      * @param args
      */
     public static void main(String[] args) {
+        UI ui = new UI();
         //check arguments
-        if (args.length != 2) {
-            System.out.println("usage: client <server-ip> <server-port>");
-            return;
-        }
+//        if (args.length != 2) {
+//            System.out.println("usage: client <server-ip> <server-port>");
+//            return;
+//        }
 
-        try {
-            (new Client(args[0], Integer.valueOf(args[1]))).run();
-        } catch (SocketException e) {
-            System.out.println("Could not connect to socket.");
-        }
+//        try {
+//            (new Client(args[0], Integer.valueOf(args[1]))).run();
+//        } catch (SocketException e) {
+//            System.out.println("Could not connect to socket.");
+//        }
     }
-
+    
     private final DatagramSocket socket;
     private final ExecutorService pool;
     private User currentUser;
@@ -209,6 +211,7 @@ public class Client {
      */
     private void handleUserList(CurrentUsersListPacket packet) {
         System.out.println(packet.getUsers().toFormattedString());
+        UI.UpdateUserList(packet.getUsers());
     }
 
     /**
@@ -227,8 +230,8 @@ public class Client {
      *
      * @throws SocketException
      */
-    public void recieve() throws SocketException {
-        pool.execute(new UDPReciever(socket, this));
+    public void receive() throws SocketException {
+        pool.execute(new UDPReceiver(socket, this));
     }
 
     /**
@@ -248,9 +251,9 @@ public class Client {
      *
      * @throws SocketException
      */
-    private void run() throws SocketException {
+    public void run() throws SocketException {
         send();
-        recieve();
+        receive();
     }
 
     /**

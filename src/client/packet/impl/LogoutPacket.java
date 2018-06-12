@@ -7,8 +7,8 @@ import client.Client;
 import client.Command;
 import client.packet.ClientPacket;
 
-import common.Packet;
-import common.Payload;
+import util.Packet;
+import util.Payload;
 
 import exception.BadPacketException;
 import exception.InvalidCommandParametersException;

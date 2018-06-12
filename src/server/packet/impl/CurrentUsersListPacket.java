@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 import server.packet.ServerPacket;
 
-import common.Payload;
-import common.UserList;
+import util.Payload;
+import util.UserList;
 
 import exception.BadPacketException;
 
