@@ -66,7 +66,7 @@ public abstract class ClientPacket extends Packet {
      * @param payload
      * @return
      */
-    public static ClientPacket fromPayload(String payload) {
+    public static ClientPacket fromPayload(Payload payload) {
         for (ClientPacketType t : ClientPacketType.values()) {
             try {
                 return fromPayload(payload, t);
@@ -84,7 +84,7 @@ public abstract class ClientPacket extends Packet {
      * @param type
      * @return
      */
-    public static ClientPacket fromPayload(String payload, ClientPacketType type) {
+    public static ClientPacket fromPayload(Payload payload, ClientPacketType type) {
         try {
             return (ClientPacket) type.getPacketClass().getDeclaredMethod("fromPayload", Payload.class)
                     .invoke(null, payload);

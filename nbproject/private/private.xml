@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/server/Server.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/View/UI.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/game/Game.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/client/UDPReceiver.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/client/UDPSender.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/server/UDPReciever.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/server/packet/ServerPacketType.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/client/Client.java</file>
+            <file>file:/C:/Users/Alisson/Documents/NetBeansProjects/CC-Redes-JogoDaVelha/src/server/packet/ServerPacket.java</file>
+        </group>
     </open-files>
 </project-private>

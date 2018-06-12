@@ -50,12 +50,12 @@ public class Client {
 //        }
     }
     
-    private final DatagramSocket socket;
-    private final ExecutorService pool;
+    public final DatagramSocket socket;
+    public final ExecutorService pool;
     private User currentUser;
-    private final String receiverIP;
+    public final String receiverIP;
 
-    private final int receiverPort;
+    public final int receiverPort;
 
     /**
      * Creates client that sends packets to specified ip and port

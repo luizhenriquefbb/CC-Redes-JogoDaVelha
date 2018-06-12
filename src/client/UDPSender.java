@@ -15,6 +15,8 @@ import client.packet.impl.LoginPacket;
 import client.packet.impl.LogoutPacket;
 import exception.InvalidClientCommandException;
 import exception.InvalidCommandParametersException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Client UDP sender that takes input from console, converts it to a packet, and sends it to the server.
@@ -29,6 +31,8 @@ public class UDPSender implements Runnable {
     private final String receiverIP;
     private final int receiverPort;
     private Client handler;
+    private String message;
+    private int counter = 1;
 
     /**
      * Send from specified client and specified socket to specified ip and port
@@ -44,35 +48,49 @@ public class UDPSender implements Runnable {
         this.receiverPort = receiverPort;
         this.handler = handler;
     }
+    public UDPSender(DatagramSocket socket, String recieverIP, int receiverPort, Client handler, String message) {
+        this.socket = socket;
+        this.receiverIP = recieverIP;
+        this.receiverPort = receiverPort;
+        this.handler = handler;
+        this.message = message;
+    }
 
     @Override
     public void run() {
         // Begin to send
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        String inputString;
 
         byte[] buffer;
+//        if (counter == 1){
+//            try {
+//                Thread.currentThread().sleep(Long.MAX_VALUE);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(UDPSender.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         while (true) {
-
-            //read input from console
-            String inputString;
-            try {
-                inputString = input.readLine();
-            } catch (IOException e) {
-                socket.close();
-                e.printStackTrace();
-                continue;
-            }
+//            try {
+//            inputString = input.readLine();
+//            } catch (IOException e) {
+//                socket.close();
+//                e.printStackTrace();
+//                continue;
+//            }
+           
+            
 
             //make sure user is logged in
             if (handler.getCurrentUser() == null
-                    && !Pattern.matches(LoginPacket.COMMAND_PATTERN.toString(), inputString)) {
+                    && !Pattern.matches(LoginPacket.COMMAND_PATTERN.toString(), message)) {
                 System.out.println("not logged in");
                 continue;
             }
 
             //convert the command to a packet payload
             try {
-                buffer = ClientPacket.fromCommand(new Command(inputString), handler).toPayload().getBytes();
+                buffer = ClientPacket.fromCommand(new Command(message), handler).toPayload().getBytes();
             } catch (InvalidCommandParametersException e) {
                 System.out.println("invalid command parameters");
                 continue;
@@ -129,7 +147,7 @@ public class UDPSender implements Runnable {
 
             //print log out message if user has logged out
             if (handler.getCurrentUser() != null
-                    && Pattern.matches(LogoutPacket.COMMAND_PATTERN.toString(), inputString)) {
+                    && Pattern.matches(LogoutPacket.COMMAND_PATTERN.toString(), message)) {
                 handler.handleLogout();
             }
             /*

@@ -372,7 +372,7 @@ public class Server {
      * @throws UnknownHostException
      */
     public void respond(DatagramPacket p) throws UnknownHostException {
-        String payload = new String(p.getData(), 0, p.getLength()).trim();
+        Payload payload = new Payload(new String(p.getData(), 0, p.getLength()).trim());
         ClientPacket cp = ClientPacket.fromPayload(payload);
 
         ack(cp, p);

@@ -15,7 +15,7 @@ import exception.BadPacketException;
 public abstract class Packet {
     private static long id = 0L;
 
-    public static Packet fromPayload(String payload) {
+    public static Packet fromPayload(Payload payload) {
         try {
             return ServerPacket.fromPayload(payload);
         } catch (BadPacketException e) {

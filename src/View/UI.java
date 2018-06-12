@@ -6,6 +6,9 @@
 package View;
 
 import client.Client;
+import client.Command;
+import client.UDPSender;
+import client.packet.ClientPacket;
 import util.User;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -25,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import util.Packet;
 
 /**
  *
@@ -132,13 +136,18 @@ public class UI implements ActionListener{
         }
         if(a.getSource() == connect){
             try {
-                (client = new Client(ip.getText(), Integer.valueOf(port.getText()))).run();
+                client = new Client(ip.getText(), Integer.valueOf(port.getText()));
+                client.run();
+//                Packet p = ClientPacket.fromCommand(new Command("login " + loginName.getText()), client);
+//                UDPSender sender = new UDPSender(client.socket, client.receiverIP, client.receiverPort, client);
+//                sender.run();
             } catch (SocketException e) {
                 System.out.println("Could not connect to socket.");
             }
         }
         else if(a.getSource() == login){
-            
+            Packet p = ClientPacket.fromCommand(new Command("login " + loginName.getText()), client);
+            UDPSender sender = new UDPSender(client.socket, client.receiverIP, client.receiverPort, client);
         }
         
     }
