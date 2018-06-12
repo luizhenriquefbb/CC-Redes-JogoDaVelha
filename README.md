@@ -11,38 +11,58 @@ VER PDF EXPLICANDO PROJETO
 
 
 ## Especificações
-Onde vai ser executado? Como os clientes sabem onde está?
-servidor dns ou ip fixo (decidir)
-Como registrar e como sincronizar o jogo e as jogadas?
-O servidor tem uma lista de usuários (não visível para os usuários) e salas (visível). Envio de mensagens
+**Onde vai ser executado?**
+A central estará no computador que rodará a classe Server.
+
+**Como os clientes sabem onde está?**
+O IP deve ser combinado previamente.
+
+**Como registrar?**
+O cliente manda um pacote informando que ele quer se registrar e o servidor cria um novo cliente e o adiciona em uma lista de clientes online.
+
+Um nome é um ID único.
+
+4 jogadores por ip no máximo.
+
+
+
+
+**Como sincronizar o jogo e as jogadas?**
+Verifica se quem mandou a jogada está na vez
+
+
+
+Perguntas relacionadas ao jogo:
 
 **São dois jogadores que não se conhecem. Como um jogador obtém a referência do outro?**
-Terá uma tela mostrando jogadores online. Um pode convidar o outro
-
+Os jogadores podem pedir uma listagem dos outros jogadores conectados ao server. Eles se conhecem apenas por nome que o servidor retorna quando pedido. ( o nome é um id único)
 
 **Depois de obter a referência, como os dois jogadores tornam-se disponíveis para jogar, e combinam quem começa primeiro?**
-Um convida e o outro pode aceitar.
-A cada rodada, há uma jogada de moeda
+Após um jogador aceitar o convite de partida, a vez é concedida automaticamente a quem convidou para jogar.
+
+Presente em: método handleAcceptRequest da classe Server
 
 **Como as mensagens contendo as jogadas são representadas e manipuladas?**
-Ama janela de log ao lado da partida
+Método handlePlay da classe Server
 
+Pela string : play <célula>. Onde play é o comando de jogar e <célula> é a posição onde o jogador gostaria de marcar. (o tabuleiro é composto por uma matriz 3 por 3)
+Quando um pacote com o comando play é reconhecido, vários passos de validação de jogada, como se é o turno do jogador e se é uma posição válida, são executados. Após essa validação o servidor, a jogada e efetuada e uma nova fase de análise começa para decidir se a jogada acabou com a partida ou ela deve continuar. Se a partida continua, o servidor manda o próximo jogador jogar e assim continua.
 
-**Como terminar o jogo? Isto é: como terminar o jogo, decidir quem ganhou, notificar serem notificados e, finalmente liberar os recursos (socket, memória, etc.)?**
-Cliente manda mensagem informando a "casa" que ele quer marcar e o servidor faz broadcast atualizando os tabuleiros
+**Como terminar o jogo? Isto é: como terminar o jogo, decidir quem ganhou, notificar serem notificados e, finalmente liberar os recursos (socket,memória, etc.)?**
+A cada jogada é verificada a condição de vitória e empate, se nenhuma das duas ocorrer o jogo continua. Se houver uma vitória, um pacote é enviado para cada jogador com o resultado da partida.
 
-
+método handlePlay da classe Server
 
 **Um jogo pode ser interrompido no meio e depois reiniciado? E como ele recomeçará?**
-Não. Derrota automática para quem sair antes
+Não. não pode
 
-**O jogo possui requisitos de segurança contra trapaças? Por exemplo, um jogador consegue fazer duas jogadas seguidas antes do adversário fazer a sua?**
-O servidor que processará tudo. Assim terá mais segrança quando se trata de trapaças.
-Um jogador não conseguirá jogar duas vezes. Mais uma vez, o servidor que processará
+**O jogo possui requisitos de segurança contra trapaças? Por exemplo, um jogador consegue fazer duas jogadas seguidas antes do adversário fazer a**sua?
+
+Não explicitamente, mas possui um mapeamento de comandos específicos (e suas expressões regulares)   e de onde essa mensagem é oriunda.
 
 **O que acontece se um jogador demorar muito na sua jogada?**
-- Ele receberá algumas mensagens para que ele jogue na Xª declara como perdedor da rodada
-- Oferece para o oponente declarar o outro como ausente.
+Espera indefinidamente
+
 
 ## Como rodar
 

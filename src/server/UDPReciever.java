@@ -42,11 +42,11 @@ public class UDPReciever implements Runnable {
                     String ip = packet.getAddress().getHostAddress();
                     int port = packet.getPort();
                     Payload payload = new Payload(new String(buffer, 0, packet.getLength()));
-                    System.out.println("[" + Calendar.getInstance().getTimeInMillis() + "] Receive from sender (IP: "
+                    System.out.println("[" + Calendar.getInstance().getTimeInMillis() + "] Recebido do sender (IP: "
                             + ip + ", Port: " + String.valueOf(port) + "): " + payload);
                     handler.respond(packet);
                 } catch (UnknownHostException e) {
-                    System.out.println("unknown host...");
+                    System.out.println("Host desconhecido...");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

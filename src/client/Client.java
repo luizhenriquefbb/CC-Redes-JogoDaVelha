@@ -4,6 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,6 +23,8 @@ import common.User;
 
 import exception.BadPacketException;
 
+import javax.swing.*;
+
 /**
  * Tic Tac Toe client
  *
@@ -35,16 +38,27 @@ public class Client {
      * @param args
      */
     public static void main(String[] args) {
+
+        args = new String[2];
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Informe o IP do servidor");
+        args[0] = scanner.nextLine();
+
+        System.out.println("informe a porta do servdor");
+        args[1] = scanner.nextLine();
+
+
+
         //check arguments
         if (args.length != 2) {
-            System.out.println("usage: client <server-ip> <server-port>");
+            System.out.println("Uso: client <ip do servidor> <porta do servidor>");
             return;
         }
 
         try {
             (new Client(args[0], Integer.valueOf(args[1]))).run();
         } catch (SocketException e) {
-            System.out.println("Could not connect to socket.");
+            System.out.println("Não foi possivel se conectar ao socket");
         }
     }
 

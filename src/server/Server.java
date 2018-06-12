@@ -13,6 +13,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -57,16 +58,19 @@ public class Server {
      */
     public static void main(String[] args) {
         //check arguments
-        if (args.length != 1) {
-            System.out.println("usage: server <server-port>");
-            return;
-        }
+//        if (args.length != 1) {
+//            System.out.println("uso: server <porta do servidor>");
+//            return;
+//        }
+
+
+
         try {
-            (new Server(Integer.valueOf(args[0]))).recieve();
+            (new Server(Integer.valueOf(8000))).recieve();
         } catch (SocketException e) {
-            System.out.println("couldn't connect to socket! exiting....");
+            System.out.println("não foi possivel conectar no servidor...");
         } catch (IOException e) {
-            System.out.println("couldn't connect to server! exiting....");
+            System.out.println("não foi possivel conectar no servidor....");
         }
     }
 
@@ -404,7 +408,7 @@ public class Server {
             return;
         }
 
-        System.out.println("[" + Calendar.getInstance().getTimeInMillis() + "] Sent to client: (IP: "
+        System.out.println("[" + Calendar.getInstance().getTimeInMillis() + "] enviado para o cliente: (IP: "
                 + addr.getHostName() + ", Port: " + String.valueOf(port) + "): " + p.toPayload());
     }
 

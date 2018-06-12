@@ -66,7 +66,7 @@ public class UDPSender implements Runnable {
             //make sure user is logged in
             if (handler.getCurrentUser() == null
                     && !Pattern.matches(LoginPacket.COMMAND_PATTERN.toString(), inputString)) {
-                System.out.println("not logged in");
+                System.out.println("Voce nao esta logado");
                 continue;
             }
 
@@ -74,10 +74,10 @@ public class UDPSender implements Runnable {
             try {
                 buffer = ClientPacket.fromCommand(new Command(inputString), handler).toPayload().getBytes();
             } catch (InvalidCommandParametersException e) {
-                System.out.println("invalid command parameters");
+                System.out.println("parametros de comando invalido");
                 continue;
             } catch (InvalidClientCommandException e) {
-                System.out.println("invalid command");
+                System.out.println("comando invalido");
                 continue;
             }
 
@@ -119,7 +119,7 @@ public class UDPSender implements Runnable {
                 } catch (SocketTimeoutException e) {
                     //no ack was received, need to try again.
                     acked = false;
-                    System.out.println("no ack received! resending packet......");
+                    System.out.println("ack nao recebido! reenviando pacote......");
                 } catch (IOException e) {
                     socket.close();
                     e.printStackTrace();
