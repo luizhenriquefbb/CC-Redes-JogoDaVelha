@@ -22,8 +22,8 @@ import exception.InvalidCommandParametersException;
 public class DenyRequestPacket extends ClientPacket {
     public static final String PACKET_FORMAT = "ackchoose,%d,%s,%s,D";
     public static final Pattern PACKET_PATTERN = Pattern.compile("^ackchoose,(\\d+),(\\w+),(\\w+),D$");
-    public static final String COMMAND = "deny";
-    public static final Pattern COMMAND_PATTERN = Pattern.compile("^deny\\s+(\\w+)$");
+    public static final String COMMAND = "negar";
+    public static final Pattern COMMAND_PATTERN = Pattern.compile("^negar\\s+(\\w+)$");
     public static final String CODE = "ackchoose";
 
     public static DenyRequestPacket fromCommand(Command command, Client handler) {

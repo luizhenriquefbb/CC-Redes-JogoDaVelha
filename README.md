@@ -78,19 +78,19 @@ $ java -jar Client.jar <server-ip> <server-port>
 ```
 
 
-Client commands:
+Comandos do cliente:
 ================
 
-`login <username>` : log in the client under this username
+`login <username>` : logar na aplicação
 
-`ls` : retrieve the list of currently online users
+`ls` : listar jogadores
 
-`choose <username>` : send a play request to this user
+`convidar <username>` : enviar um convite para uma pessoa
 
-`accept <username>` : accept a play request from this user
+`aceitar <username>` : aceitar convite
 
-`deny <username>` : deny a play request from this user
+`negar <username>` : negar convite
 
-`play <cellNo>` : place an X or O on the specified cell
+`play <cellNo>` : fazer uma jogada na casa especificada
 
-`logout` : log out of server
+`logout` : sair da aplicação

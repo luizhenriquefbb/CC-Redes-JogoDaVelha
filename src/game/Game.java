@@ -73,9 +73,9 @@ public class Game {
      */
     public void terminate() {
         players.getLeft().setCurrentGame(null);
-        players.getLeft().setState(UserState.FREE);
+        players.getLeft().setState(UserState.LIVRE);
         players.getRight().setCurrentGame(null);
-        players.getRight().setState(UserState.FREE);
+        players.getRight().setState(UserState.LIVRE);
 
     }
 

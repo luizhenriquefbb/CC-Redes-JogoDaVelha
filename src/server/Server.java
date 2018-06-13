@@ -66,7 +66,7 @@ public class Server {
 
 
         try {
-            (new Server(Integer.valueOf(8000))).recieve();
+            (new Server(Integer.valueOf(7999))).recieve();
         } catch (SocketException e) {
             System.out.println("não foi possivel conectar no servidor...");
         } catch (IOException e) {
@@ -149,8 +149,8 @@ public class Server {
         }
 
         //set states to busy
-        sender.setState(UserState.BUSY);
-        receiver.setState(UserState.BUSY);
+        sender.setState(UserState.OCUPADO);
+        receiver.setState(UserState.OCUPADO);
 
         //send ackchoose packet to original user
         try {
@@ -191,8 +191,8 @@ public class Server {
         }
 
         //set states to free
-        sender.setState(UserState.FREE);
-        receiver.setState(UserState.FREE);
+        sender.setState(UserState.LIVRE);
+        receiver.setState(UserState.LIVRE);
 
         //send ackchoose packet to original requester
         try {
@@ -227,11 +227,11 @@ public class Server {
                 return new LoginAcknowledgementPacket(LoginAcknowledgementType.FAILURE);
             }
             // login success for offline/newly registered user
-            u.setState(UserState.FREE);
+            u.setState(UserState.LIVRE);
             return new LoginAcknowledgementPacket(LoginAcknowledgementType.SUCCESS);
 
-        } else if (u.getState() == UserState.BUSY || u.getState() == UserState.DECISION
-                || u.getState() == UserState.FREE) {
+        } else if (u.getState() == UserState.OCUPADO || u.getState() == UserState.DECISAO
+                || u.getState() == UserState.LIVRE) {
             // login failure for online user
             return new LoginAcknowledgementPacket(LoginAcknowledgementType.FAILURE);
 
@@ -336,22 +336,22 @@ public class Server {
     private ServerPacket handlePlayRequest(ChoosePlayerPacket packet) {
         // check state of sender
         User sender = currentUsers.get(packet.getSender());
-        if (sender == null || sender.getState() != UserState.FREE) {
+        if (sender == null || sender.getState() != UserState.LIVRE) {
             return new PlayRequestAcknowledgementPacket(sender == null ? "" : sender.getUsername(),
                     PlayRequestAcknowledgementStatus.FAILURE);
         }
 
         // sender is free, check state of receiver
         User receiver = currentUsers.get(packet.getReciever());
-        if (receiver == null || receiver.getState() != UserState.FREE || receiver == sender) {
+        if (receiver == null || receiver.getState() != UserState.LIVRE || receiver == sender) {
             return new PlayRequestAcknowledgementPacket(packet.getReciever(), PlayRequestAcknowledgementStatus.FAILURE);
         }
 
         // receiver is free, set states into decision
-        sender.setState(UserState.DECISION);
-        receiver.setState(UserState.DECISION);
+        sender.setState(UserState.DECISAO);
+        receiver.setState(UserState.DECISAO);
 
-        // send choose message to client two
+        // send convidar message to client two
         try {
             sendPacket(new PlayRequestPacket(sender.getUsername()), receiver);
         } catch (UnknownHostException e) {

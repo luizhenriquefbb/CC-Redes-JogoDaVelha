@@ -20,11 +20,11 @@ import exception.InvalidCommandParametersException;
  *
  */
 public class ChoosePlayerPacket extends ClientPacket {
-    public static final String PACKET_FORMAT = "choose,%d,%s,%s";
-    public static final Pattern PACKET_PATTERN = Pattern.compile("^choose,(\\d+),(\\w+),(\\w+)$");
-    public static final String COMMAND = "choose";
-    public static final Pattern COMMAND_PATTERN = Pattern.compile("^choose\\s+(\\w*+)$");
-    public static final String CODE = "choose";
+    public static final String PACKET_FORMAT = "convidar,%d,%s,%s";
+    public static final Pattern PACKET_PATTERN = Pattern.compile("^convidar,(\\d+),(\\w+),(\\w+)$");
+    public static final String COMMAND = "convidar";
+    public static final Pattern COMMAND_PATTERN = Pattern.compile("^convidar\\s+(\\w*+)$");
+    public static final String CODE = "convidar";
 
 
     public static ChoosePlayerPacket fromCommand(Command command, Client handler) {

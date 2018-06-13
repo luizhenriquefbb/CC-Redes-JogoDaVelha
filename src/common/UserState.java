@@ -10,9 +10,9 @@ import java.util.Map;
  *
  */
 public enum UserState {
-    FREE("F"),
-    BUSY("B"),
-    DECISION("D"),
+    LIVRE("F"),
+    OCUPADO("B"),
+    DECISAO("D"),
     OFFLINE("O");
 
     private final String code;

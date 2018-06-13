@@ -23,9 +23,9 @@ public class AcceptRequestPacket extends ClientPacket {
 
     public static final String PACKET_FORMAT = "ackchoose,%d,%s,%s,A";
     public static final Pattern PACKET_PATTERN = Pattern.compile("^ackchoose,(\\d+),(\\w+),(\\w+),A$");
-    public static final String COMMAND = "accept";
-    public static final Pattern COMMAND_PATTERN = Pattern.compile("^accept\\s+(\\w+)$");
-    public static final String CODE = "accept";
+    public static final String COMMAND = "aceitar";
+    public static final Pattern COMMAND_PATTERN = Pattern.compile("^aceitar\\s+(\\w+)$");
+    public static final String CODE = "aceitar";
 
     public static AcceptRequestPacket fromCommand(Command command, Client handler) {
         Matcher m = COMMAND_PATTERN.matcher(command.content);
